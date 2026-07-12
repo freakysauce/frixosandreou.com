@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept C — The Crossing</title>
+<style>
+@font-face{font-family:'Melodrama';src:url('../../assets/fonts/Melodrama-Variable.woff2') format('woff2');font-weight:300 700;font-display:swap}
+@font-face{font-family:'General Sans';src:url('../../assets/fonts/GeneralSans-Variable.woff2') format('woff2');font-weight:200 700;font-display:swap}
+@font-face{font-family:'Spline Sans Mono';src:url('../../assets/fonts/SplineSansMono-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--deep:#0E1B1E;--gold:#D9A441;--foam:#F2EEE3;--mist:#7FA0A8}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--deep);color:var(--foam);font-family:'General Sans',sans-serif;overflow:hidden}
+#sea{position:fixed;inset:0;width:100%;height:100%;display:block;background:linear-gradient(#0B1517 0%,#10262B 60%,#0E1B1E 100%)}
+.veil{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% 108%,rgba(6,10,11,.72) 0%,rgba(6,10,11,.25) 45%,transparent 70%);pointer-events:none}
+.hero{position:relative;z-index:2;height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:0 24px 7dvh}
+.eyebrow{font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:.34em;color:var(--mist)}
+h1{font-family:'Melodrama',serif;font-weight:480;font-size:clamp(58px,10.5vw,164px);line-height:1;margin:14px 0 6px;letter-spacing:.005em}
+h1 .gold{color:var(--gold)}
+.tag{font-family:'General Sans',sans-serif;font-weight:300;font-size:clamp(14px,1.6vw,20px);letter-spacing:.42em;text-transform:uppercase;color:var(--foam)}
+.pos{margin-top:20px;font-weight:300;font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#C4CDC9;max-width:52ch}
+.cta-row{margin-top:30px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.cta{font-family:'Spline Sans Mono',monospace;font-size:13px;letter-spacing:.12em;text-decoration:none;padding:13px 28px;border:1px solid var(--gold);color:var(--gold);border-radius:999px;transition:all .25s}
+.cta:hover,.cta:focus-visible{background:var(--gold);color:#0B1517}
+.cta.ghost{border-color:#3E585C;color:var(--mist)}
+.cta.ghost:hover,.cta.ghost:focus-visible{background:transparent;border-color:var(--foam);color:var(--foam)}
+.myth{position:fixed;z-index:2;top:calc(34dvh - 30px);right:clamp(20px,6vw,90px);font-style:italic;font-family:'Melodrama',serif;font-weight:340;font-size:clamp(13px,1.3vw,17px);color:rgba(242,238,227,.75);text-align:right}
+.myth small{display:block;font-family:'Spline Sans Mono',monospace;font-style:normal;font-size:10px;letter-spacing:.26em;color:var(--mist);margin-top:8px}
+@media (max-width:720px){ .myth{top:auto;bottom:47dvh;right:20px} h1{font-size:clamp(52px,14vw,90px)} }
+@media (prefers-reduced-motion:no-preference){
+  .rise{opacity:0;transform:translateY(16px);animation:rise 1.1s cubic-bezier(.2,.6,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<canvas id="sea" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+<p class="myth rise" style="animation-delay:1s">“He crossed the sea<br>on the golden ram.”<small>PHRIXUS — THE NAME, THE MYTH</small></p>
+<main class="hero">
+  <p class="eyebrow rise" style="animation-delay:.15s">COPENHAGEN — REMOTE ACROSS EUROPE</p>
+  <h1 class="rise" style="animation-delay:.3s">Frixos <span class="gold">Andreou</span></h1>
+  <p class="tag rise" style="animation-delay:.5s">Forward Deployed Engineer</p>
+  <p class="pos rise" style="animation-delay:.65s">I embed with your team and ship the slice that proves the value — working software, on your real data, demo-first.</p>
+  <div class="cta-row rise" style="animation-delay:.8s">
+    <a class="cta" href="mailto:frixos.andreou.dk@gmail.com">START A CONVERSATION</a>
+    <a class="cta ghost" href="#work">SEE THE PROOF</a>
+  </div>
+</main>
+<script>
+const cv=document.getElementById('sea');
+const gl=cv.getContext('webgl',{antialias:false,alpha:false});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(gl){
+const VS='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+const FS=`precision highp float;
+uniform vec2 R;uniform float T;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+ return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.13;a*=.5;}return v;}
+void main(){
+ vec2 uv=gl_FragCoord.xy/R; float hor=.66;
+ vec3 col;
+ if(uv.y>hor){
+   float t=(uv.y-hor)/(1.-hor);
+   col=mix(vec3(.075,.16,.17),vec3(.035,.075,.08),t);
+   col+=vec3(.10,.075,.03)*exp(-t*9.)* (1.-.3*fbm(vec2(uv.x*7.,t*3.)));
+   float st=step(.9985,h(floor(uv*R/2.)))*t*.5;
+   col+=vec3(st);
+ } else {
+   float d=(hor-uv.y)/hor;            // 0 at horizon -> 1 at bottom
+   float per=.05/(d+.028);            // perspective scale
+   vec2 w=vec2((uv.x-.5)*R.x/R.y*per*22.,per*30.+T*.55);
+   float rip=fbm(w)*.5+fbm(w*2.7+vec2(0.,T*.35))*.35;
+   vec3 water=mix(vec3(.078,.19,.20),vec3(.045,.10,.11),d);
+   water*=.85+.3*rip;
+   float cx=.62;
+   float width=.006+d*.13+rip*.02*d;
+   float path=exp(-pow(abs(uv.x-cx+ (rip-.42)*.05*d ),2.)/(width*width));
+   float glint=smoothstep(.45,.95,rip)*path;
+   vec3 gold=vec3(.85,.64,.25);
+   col=water+gold*path*.35+vec3(.96,.84,.48)*glint*.9;
+   col+=gold*exp(-d*16.)*.5*path;     // hot line at horizon
+ }
+ col+=(h(gl_FragCoord.xy)-.5)*.015;   // grain vs banding
+ gl_FragColor=vec4(col,1.);}
+`;
+function sh(t,s){const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);return x;}
+const pr=gl.createProgram();
+gl.attachShader(pr,sh(gl.VERTEX_SHADER,VS));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,FS));
+gl.linkProgram(pr);gl.useProgram(pr);
+const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+const lp=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(lp);gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);
+const uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T');
+function size(){const d=Math.min(devicePixelRatio||1,1.5);
+  cv.width=innerWidth*d;cv.height=innerHeight*d;gl.viewport(0,0,cv.width,cv.height);
+  gl.uniform2f(uR,cv.width,cv.height);}
+size();addEventListener('resize',size);
+let start=performance.now();
+function frame(){
+  gl.uniform1f(uT,(performance.now()-start)/1000);
+  gl.drawArrays(gl.TRIANGLES,0,3);
+  if(!reduce)requestAnimationFrame(frame);
+}
+frame();
+}
+</script>
+</body>
+</html>

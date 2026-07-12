@@ -1,0 +1,6 @@
+FACTS.md
+WAKEUP.md
+node_modules/
+*.log
+shots/
+tools/zips/

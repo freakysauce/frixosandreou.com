@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept B — The Drawing</title>
+<style>
+@font-face{font-family:'Cabinet Grotesk';src:url('../../assets/fonts/CabinetGrotesk-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Switzer';src:url('../../assets/fonts/Switzer-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Spline Sans Mono';src:url('../../assets/fonts/SplineSansMono-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--paper:#F6F5F1;--ink:#141414;--gold:#C89B3C;--con:#A6A29A;--hair:#DEDBD3}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Switzer',sans-serif;overflow:hidden;
+  background-image:linear-gradient(var(--hair) 1px,transparent 1px),linear-gradient(90deg,var(--hair) 1px,transparent 1px);
+  background-size:88px 88px;background-position:center center}
+.frame{position:fixed;inset:18px;border:1px solid var(--ink);pointer-events:none;z-index:5}
+.hero{height:100dvh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;padding:0 clamp(28px,6vw,110px);gap:clamp(12px,3vw,48px)}
+.eyebrow{font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--ink);display:flex;gap:12px;align-items:baseline}
+.eyebrow .dot{width:9px;height:9px;background:var(--gold);display:inline-block;transform:translateY(.5px)}
+h1{font-family:'Cabinet Grotesk',sans-serif;font-weight:800;text-transform:uppercase;
+  font-size:clamp(58px,9.6vw,150px);line-height:.9;letter-spacing:-.015em;margin:20px 0 22px}
+h1 span{display:block}
+h1 .second{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.tagline{font-family:'Spline Sans Mono',monospace;font-size:clamp(12px,1.2vw,14px);letter-spacing:.3em;text-transform:uppercase;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:10px 0;display:inline-block}
+.pos{margin-top:26px;font-size:clamp(16px,1.5vw,19px);font-weight:400;line-height:1.55;max-width:42ch;color:#3A3833}
+.myth{margin-top:10px;font-size:14px;font-style:italic;color:#8A857B}
+.cta-row{margin-top:34px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.cta{font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:14px 30px;background:var(--ink);color:var(--paper);transition:background .2s}
+.cta:hover,.cta:focus-visible{background:var(--gold);color:var(--ink)}
+.cta2{font-family:'Spline Sans Mono',monospace;font-size:13px;letter-spacing:.1em;color:var(--ink);text-decoration:underline;text-underline-offset:5px}
+.draw{position:relative;height:min(78vh,680px)}
+.draw svg{width:100%;height:100%;overflow:visible}
+.note{font-family:'Spline Sans Mono',monospace;font-size:11px;fill:#8A857B;letter-spacing:.08em}
+.plate{position:absolute;bottom:0;right:0;border:1px solid var(--ink);font-family:'Spline Sans Mono',monospace;font-size:10.5px;letter-spacing:.14em;background:var(--paper)}
+.plate div{padding:6px 12px;border-bottom:1px solid var(--ink)}
+.plate div:last-child{border-bottom:0}
+.plate b{font-weight:400;color:var(--gold)}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;grid-template-rows:minmax(0,.9fr) auto;align-content:center;padding-top:6dvh}
+  .draw{order:-1;height:34dvh}
+  .plate{display:none}
+  h1{font-size:clamp(52px,13.5vw,88px)}
+  .frame{inset:10px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .rise{opacity:0;transform:translateY(12px);animation:rise .8s cubic-bezier(.2,.6,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<div class="frame" aria-hidden="true"></div>
+<main class="hero">
+  <section>
+    <p class="eyebrow rise" style="animation-delay:.05s"><span class="dot"></span>FORWARD DEPLOYED ENGINEER — COPENHAGEN</p>
+    <h1><span class="rise" style="animation-delay:.15s">Frixos</span><span class="second rise" style="animation-delay:.25s">Andreou</span></h1>
+    <p class="tagline rise" style="animation-delay:.4s">Ships the slice that proves the value</p>
+    <p class="pos rise" style="animation-delay:.5s">I embed with your team and deliver working software on your real data — demo-first, scoped honestly, handed off clean.</p>
+    <p class="myth rise" style="animation-delay:.6s">Named for the one who rode the golden ram.</p>
+    <div class="cta-row rise" style="animation-delay:.7s">
+      <a class="cta" href="mailto:frixos.andreou.dk@gmail.com">Start a conversation</a>
+      <a class="cta2" href="#work">See the proof ↓</a>
+    </div>
+  </section>
+  <section class="draw" aria-label="Technical construction drawing of the golden ram sigil">
+    <svg id="d" viewBox="-40 -20 592 572"></svg>
+    <div class="plate">
+      <div>SIGIL — GOLDEN RAM</div>
+      <div>SPIRAL <b>r = r₀·φ^(−2θ/π)</b></div>
+      <div>DRAWN 2026 · CPH · SCALE 1:1</div>
+    </div>
+  </section>
+</main>
+<script>
+const PHI=(1+Math.sqrt(5))/2, B=Math.log(PHI)/(Math.PI/2), D2R=Math.PI/180;
+const H={cx:332,cy:252,rRoot:140,startAngle:-102,sweepTurns:1.18,wRoot:34,wTip:1.5,taperPow:1.4,widthCap:.52};
+function pt(t,mirror){const th=H.sweepTurns*2*Math.PI*t,r=H.rRoot*Math.exp(-B*th),a=H.startAngle*D2R+th;
+  let x=H.cx+r*Math.cos(a),y=H.cy+r*Math.sin(a); if(mirror)x=512-x; return[x,y,r,a];}
+function center(mirror){return [mirror?512-H.cx:H.cx,H.cy];}
+function ribbon(mirror){
+  const o=[],n=[],S=110;
+  for(let i=0;i<=S;i++){const t=i/S,[x,y,r,a]=pt(t,mirror);
+    let w=H.wRoot+(H.wTip-H.wRoot)*Math.pow(t,H.taperPow); w=Math.min(w,H.widthCap*r);
+    const s=mirror?-1:1, nx=Math.cos(a)*s, ny=Math.sin(a);
+    o.push([x+nx*w,y+ny*w]); n.push([x-nx*w,y-ny*w]);}
+  return 'M'+o.concat(n.reverse()).map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z';
+}
+function centerline(mirror){
+  const p=[];for(let i=0;i<=110;i++){const[x,y]=pt(i/110,mirror);p.push([x,y]);}
+  return 'M'+p.map(q=>q[0].toFixed(1)+' '+q[1].toFixed(1)).join('L');
+}
+const facePath='M228 158L284 158L279 296L256 414L233 296L228 158Z';
+const svg=document.getElementById('d'),NS='http://www.w3.org/2000/svg';
+function el(n,at){const e=document.createElementNS(NS,n);for(const k in at)e.setAttribute(k,at[k]);svg.appendChild(e);return e;}
+// construction: phi-ratio circles about each spiral center
+const radii=[H.rRoot,H.rRoot/PHI,H.rRoot/(PHI*PHI),H.rRoot/(PHI**3)];
+for(const m of [false,true]){const [ccx,ccy]=center(m);
+  radii.forEach((r,i)=>el('circle',{cx:ccx,cy:ccy,r,fill:'none',stroke:'#A6A29A','stroke-width':.7,'stroke-dasharray':'3 5',opacity:.55,class:'con'}));
+  el('line',{x1:ccx-6,y1:ccy,x2:ccx+6,y2:ccy,stroke:'#A6A29A','stroke-width':.8,class:'con'});
+  el('line',{x1:ccx,y1:ccy-6,x2:ccx,y2:ccy+6,stroke:'#A6A29A','stroke-width':.8,class:'con'});
+}
+// axis of symmetry
+el('line',{x1:256,y1:-10,x2:256,y2:530,stroke:'#A6A29A','stroke-width':.7,'stroke-dasharray':'10 6 2 6',opacity:.6,class:'con'});
+// dimension callouts
+const t1=el('text',{x:474,y:118,class:'note','text-anchor':'start'});t1.textContent='r·φ⁻¹ / 90°';
+const t2=el('text',{x:256,y:-6,class:'note','text-anchor':'middle'});t2.textContent='AXIS';
+const t3=el('text',{x:38,y:118,class:'note','text-anchor':'end'});t3.textContent='b = ln φ / ½π';
+// leader lines
+el('line',{x1:430,y1:132,x2:468,y2:114,stroke:'#A6A29A','stroke-width':.7,class:'con'});
+el('line',{x1:84,y1:132,x2:44,y2:114,stroke:'#A6A29A','stroke-width':.7,class:'con'});
+// animated spiral centerlines
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+for(const m of [false,true]){
+  const p=el('path',{d:centerline(m),fill:'none',stroke:'#141414','stroke-width':1.4});
+  if(!reduce){const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;
+    p.style.transition='stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1) .3s';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>p.style.strokeDashoffset=0));}
+}
+// final gold fill blooms in
+const fills=[ribbon(false),ribbon(true),facePath].map(d=>el('path',{d,fill:'#C89B3C',opacity:reduce?1:0}));
+if(!reduce){fills.forEach((f,i)=>{f.style.transition=`opacity .9s ease ${1.7+i*.15}s`;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.opacity=1));});
+  // constructions recede once the mark lands
+  setTimeout(()=>{document.querySelectorAll('.con').forEach(c=>{c.style.transition='opacity 1s ease';c.style.opacity=.28;});},2600);}
+</script>
+</body>
+</html>
