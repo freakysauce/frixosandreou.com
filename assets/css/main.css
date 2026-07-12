@@ -72,7 +72,9 @@ body{
 .hero-eyebrow .dot{width:9px;height:9px;background:var(--gold);flex:none}
 .hero h1{font-family:var(--disp);font-weight:800;text-transform:uppercase;
   font-size:clamp(54px,9.2vw,148px);line-height:.9;letter-spacing:-.015em;margin:20px 0 24px}
-.hero h1 span{display:block}
+.hero h1>span{display:block}
+.hero h1 .glyph{display:inline}
+.hero h1 .glyph.cycling{color:var(--gold-deep);-webkit-text-stroke:0}
 .hero h1 .outline{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
 @supports not (-webkit-text-stroke:1px black){.hero h1 .outline{color:var(--ink);opacity:.35}}
 .hero .tagline{font-family:var(--mono);font-size:clamp(11px,1.15vw,14px);letter-spacing:.28em;text-transform:uppercase;

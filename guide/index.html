@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Build notes — frixos-site</title>
+<title>Build notes · frixos-site</title>
 <meta name="description" content="How this site was designed and built.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -28,43 +28,43 @@
 <body class="grid-paper">
 <div class="sheet-frame" aria-hidden="true"></div>
 <main class="doc">
-  <p class="k">APPENDIX — BUILD NOTES (UNLISTED)</p>
+  <p class="k">APPENDIX · BUILD NOTES (UNLISTED)</p>
   <h1>How this site<br>was built</h1>
-  <p class="lede">Designed and built end-to-end by <b>Claude (Fable 5, Anthropic)</b> in one autonomous session — concept, identity, code, copy, and the assets around it. Every line of HTML, CSS, and JavaScript is hand-written; no site builders, no templates, no frameworks.</p>
+  <p class="lede">Designed and built end-to-end by <b>Claude (Fable 5, Anthropic)</b> in one autonomous session: concept, identity, code, copy, and the assets around it. Every line of HTML, CSS, and JavaScript is hand-written; no site builders, no templates, no frameworks.</p>
 
   <h2>The identity</h2>
-  <p>Frixos is the Greek name of Phrixus, the boy who escaped on the back of a golden ram — the ram whose fleece became the Golden Fleece and who was set among the stars as Aries. The sigil takes the myth literally in one respect only: the horns are <b>true golden spirals</b>, <code>r = r₀·φ^(−2θ/π)</code> — φ growth per quarter turn. The "golden" in golden ram is mathematics, not costume. The mark is generated parametrically (see <code>tools/export-brand.mjs</code> and <code>assets/js/main.js</code> — the same geometry draws the favicon, the nav mark, the hero construction drawing, and the constellation).</p>
+  <p>Frixos is the Greek name of Phrixus, the boy who escaped on the back of a golden ram: the ram whose fleece became the Golden Fleece and who was set among the stars as Aries. The sigil takes the myth literally in one respect only: the horns are <b>true golden spirals</b>, <code>r = r₀·φ^(−2θ/π)</code>, φ growth per quarter turn. The "golden" in golden ram is mathematics, not costume. The mark is generated parametrically (see <code>tools/export-brand.mjs</code> and <code>assets/js/main.js</code>; the same geometry draws the favicon, the nav mark, the hero construction drawing, and the constellation).</p>
 
   <h2>The concept bake-off</h2>
   <p>Three genuinely different directions were designed and built as single-fold prototypes, screenshotted at desktop and mobile widths, and judged against the brief: signal senior judgment and shipping ability to hiring managers and prospective clients. The losers live on under <a href="../concepts/a-aries/">/concepts/a-aries</a> and <a href="../concepts/c-crossing/">/concepts/c-crossing</a>.</p>
   <div class="loser">
-    <b>A — "Aries, the Instrument"</b> (runner-up)
-    <p>A dark celestial chart: ink-indigo, graticule arcs, mono coordinates, the sigil assembling as a gold constellation. Elegant and thematically rich — but the closest of the three to the default "dark portfolio with an accent color," and the constellation figure was ambiguous at a glance. It lost the site but won a section: FIG. II is its constellation, given a home as one dark plate in a light drawing set.</p>
+    <b>A · "Aries, the Instrument"</b> (runner-up)
+    <p>A dark celestial chart: ink-indigo, graticule arcs, mono coordinates, the sigil assembling as a gold constellation. Elegant and thematically rich, but the closest of the three to the default "dark portfolio with an accent color," and the constellation figure was ambiguous at a glance. It lost the site but won a section: FIG. II is its constellation, given a home as one dark plate in a light drawing set.</p>
   </div>
   <div class="loser">
-    <b>B — "The Drawing"</b> (winner)
-    <p>The myth, engineered: gallery-paper ground, a massive grotesque wordmark, and the sigil presented as a live technical construction drawing with real φ annotations. It won because it is the only concept where the identity itself is the hero, it extends naturally into a whole site (a numbered drawing set — evidence tables, procedure plates, a title block), and it performs the positioning instead of decorating it: measured, documented, evidence-first.</p>
+    <b>B · "The Drawing"</b> (winner)
+    <p>The myth, engineered: gallery-paper ground, a massive grotesque wordmark, and the sigil presented as a live technical construction drawing with real φ annotations. It won because it is the only concept where the identity itself is the hero, it extends naturally into a whole site (a numbered drawing set with evidence tables, procedure plates, a title block), and it performs the positioning instead of decorating it: measured, documented, evidence-first.</p>
   </div>
   <div class="loser">
-    <b>C — "The Crossing"</b>
-    <p>A raw-WebGL fragment shader of the night sea with a gold light-path — Phrixus's crossing. The single most cinematic image of the three, and the first to be cut: the identity almost disappears (no sigil, no system), the metaphor doesn't extend past the fold, and on a narrow phone it is mostly empty water. Spectacle lost to restraint, as it should here.</p>
+    <b>C · "The Crossing"</b>
+    <p>A raw-WebGL fragment shader of the night sea with a gold light-path: Phrixus's crossing. The single most cinematic image of the three, and the first to be cut: the identity almost disappears (no sigil, no system), the metaphor doesn't extend past the fold, and on a narrow phone it is mostly empty water. Spectacle lost to restraint, as it should here.</p>
   </div>
 
   <h2>Technique inventory</h2>
   <ul>
-    <li><b>Parametric identity:</b> one golden-spiral definition generates every rendering of the mark — solid, construction drawing, constellation, favicon.</li>
+    <li><b>Parametric identity:</b> one golden-spiral definition generates every rendering of the mark: solid, construction drawing, constellation, favicon.</li>
     <li><b>Live construction drawing:</b> the hero sigil draws its own spiral centerlines (SVG stroke-dash animation), blooms gold, then lets its construction geometry recede.</li>
     <li><b>Constellation plate:</b> the same spiral sampled as stars, line-drawn on scroll into view.</li>
-    <li><b>Type system:</b> Cabinet Grotesk (display), Switzer (text), Spline Sans Mono (annotations) — variable fonts, self-hosted.</li>
+    <li><b>Type system:</b> Cabinet Grotesk (display), Switzer (text), Spline Sans Mono (annotations); variable fonts, self-hosted.</li>
     <li><b>Progressive enhancement:</b> entrance animations are gated behind a JS-added class; without JavaScript (or with <code>prefers-reduced-motion</code>) nothing is ever hidden and the drawing renders complete.</li>
-    <li><b>Evidence as design:</b> the Sentys benchmark table is set like a test record — because the numbers are real, and real numbers deserve a title block.</li>
+    <li><b>Evidence as design:</b> the Sentys benchmark table is set like a test record, because the numbers are real, and real numbers deserve a title block.</li>
   </ul>
 
   <h2>Generated media (disclosed)</h2>
-  <p>Three AI-generated assets ship on this site, all made with Higgsfield models and disclosed in place: the 4K upscale of the owner's portrait (Bytedance upscaler over the original photograph), the golden-fleece macro still (Soul 2.0), and the four-second fleece shimmer clip (Seedance 1.5, compressed to ~380 KB). Everything else — sigil, charts, layouts, OG image, LinkedIn banner — is hand-built SVG, CSS, and code — including the static canvas starfield behind the constellation.</p>
+  <p>Three AI-generated assets ship on this site, all made with Higgsfield models and disclosed in place: the 4K upscale of the owner's portrait (Bytedance upscaler over the original photograph), the golden-fleece macro still (Soul 2.0), and the four-second fleece shimmer clip (Seedance 1.5, compressed to ~380 KB). Everything else (sigil, charts, layouts, OG image, LinkedIn banner) is hand-built SVG, CSS, and code, including the static canvas starfield behind the constellation.</p>
 
   <h2>Credit</h2>
-  <p>Design, code, copy, art direction, and build notes: <b>Claude Fable 5</b> (Anthropic) — working as designer-engineer for Frixos Andreou, July 2026. Repository: <a href="https://github.com/freakysauce/frixos-site-fable" rel="noopener">github.com/freakysauce/frixos-site-fable</a>.</p>
+  <p>Design, code, copy, art direction, and build notes: <b>Claude Fable 5</b> (Anthropic), working as designer-engineer for Frixos Andreou, July 2026. Repository: <a href="https://github.com/freakysauce/frixos-site-fable" rel="noopener">github.com/freakysauce/frixos-site-fable</a>.</p>
 </main>
 </body>
 </html>

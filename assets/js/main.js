@@ -165,6 +165,44 @@
     }
   }
 
+
+  /* ---- wordmark decode: drafted by the machine, letter by letter ---- */
+  var nameEl = document.querySelector('.hero h1');
+  if (nameEl && !reduce) {
+    nameEl.setAttribute('aria-label', 'Frixos Andreou');
+    var GLYPHS = 'ΦΡΙΞΟΣΑΝΔΕΥ<>/=+*#0147';
+    var allLetters = [];
+    nameEl.querySelectorAll('span').forEach(function (word) {
+      word.setAttribute('aria-hidden', 'true');
+      var text = word.textContent;
+      word.textContent = '';
+      text.split('').forEach(function (ch) {
+        var g = document.createElement('span');
+        g.className = 'glyph'; g.textContent = ch;
+        word.appendChild(g);
+        allLetters.push({ el: g, ch: ch });
+      });
+    });
+    var runDecode = function () {
+      allLetters.forEach(function (L, i) {
+        var lockAt = 350 + i * 70;
+        L.el.classList.add('cycling');
+        var iv = setInterval(function () {
+          L.el.textContent = GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
+        }, 42);
+        setTimeout(function () {
+          clearInterval(iv);
+          L.el.textContent = L.ch;
+          L.el.classList.remove('cycling');
+        }, lockAt);
+      });
+    };
+    runDecode();
+    nameEl.addEventListener('click', function () {
+      if (!nameEl.querySelector('.cycling')) runDecode();
+    });
+  }
+
   /* ---- static starfield behind the night plate ---- */
   var night = document.querySelector('.plate-night');
   if (night) {

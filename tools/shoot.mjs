@@ -53,7 +53,7 @@ try {
   await send(ws, 'Emulation.setDeviceMetricsOverride',
     { width: W, height: Hh, deviceScaleFactor: 1, mobile: W < 600 });
   await send(ws, 'Page.navigate', { url });
-  await sleep(5200); // let fonts, drawings, reveals settle (snap mode recommended)
+  await sleep(parseInt(process.env.SHOOT_WAIT || '5200')); // settle time, override via SHOOT_WAIT
   let clip;
   if (full) {
     const { result } = await send(ws, 'Page.getLayoutMetrics');
