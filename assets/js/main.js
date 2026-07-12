@@ -166,41 +166,46 @@
   }
 
 
-  /* ---- wordmark decode: letters hold register while the machine writes ---- */
+  /* ---- wordmark decode: locked letters stay one text node so kerning survives ---- */
   var nameEl = document.querySelector('.hero h1');
   if (nameEl && !reduce) {
     nameEl.setAttribute('aria-label', 'Frixos Andreou');
     var GLYPHS = 'ΦΡΙΞΟΣΑΝΔΕΥ<>/=+*#0147';
-    var allLetters = [];
+    var words = [];
     nameEl.querySelectorAll('span').forEach(function (word) {
       word.setAttribute('aria-hidden', 'true');
-      var text = word.textContent;
-      word.textContent = '';
-      text.split('').forEach(function (ch) {
-        var g = document.createElement('span');
-        g.className = 'glyph'; g.textContent = ch;
-        word.appendChild(g);
-        allLetters.push({ el: g, ch: ch });
-      });
+      words.push({ el: word, text: word.textContent });
     });
+    var starts = [], total = 0;
+    words.forEach(function (w) { starts.push(total); total += w.text.length; });
+    var running = false;
     var runDecode = function () {
-      allLetters.forEach(function (L, i) {
-        var lockAt = 450 + i * 85;
-        L.el.classList.add('cycling');
-        var iv = setInterval(function () {
-          L.el.textContent = GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
-        }, 46);
-        setTimeout(function () {
-          clearInterval(iv);
-          L.el.textContent = L.ch;
-          L.el.classList.remove('cycling');
-        }, lockAt);
-      });
+      if (running) return;
+      running = true;
+      var t0 = performance.now();
+      var tick = setInterval(function () {
+        var elapsed = performance.now() - t0;
+        var locked = elapsed < 450 ? 0 : Math.min(Math.floor((elapsed - 450) / 85) + 1, total);
+        words.forEach(function (w, wi) {
+          var n = Math.min(Math.max(locked - starts[wi], 0), w.text.length);
+          if (n >= w.text.length) {
+            if (w.el.firstElementChild) w.el.textContent = w.text;
+            return;
+          }
+          var cyc = '';
+          for (var k = n; k < w.text.length; k++) {
+            cyc += GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
+          }
+          w.el.textContent = w.text.slice(0, n);
+          var s = document.createElement('span');
+          s.className = 'cycling'; s.textContent = cyc;
+          w.el.appendChild(s);
+        });
+        if (locked >= total) { clearInterval(tick); running = false; }
+      }, 46);
     };
     runDecode();
-    nameEl.addEventListener('click', function () {
-      if (!nameEl.querySelector('.cycling')) runDecode();
-    });
+    nameEl.addEventListener('click', runDecode);
   }
 
   /* ---- static starfield behind the night plate ---- */

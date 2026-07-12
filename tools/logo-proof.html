@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#F7F5EE;display:flex;gap:0;align-items:center;justify-content:center;height:100vh}div{text-align:center;font:12px monospace;color:#7C776C}img,svg{width:380px;display:block}</style><div><img src="../assets/brand/sigil.svg"><p>brand/sigil.svg (the PNG source)</p></div><div><svg id="s" viewBox="0 0 512 512"></svg><p>website hero fills (main.js function)</p></div><script>
+var PHI=(1+Math.sqrt(5))/2,B=Math.log(PHI)/(Math.PI/2),D2R=Math.PI/180;
+var H={cx:332,cy:252,rRoot:140,startAngle:-102,sweepTurns:1.18,wRoot:34,wTip:1.5,taperPow:1.4,widthCap:.52};
+function rib(m){var o=[],n=[],S=110;for(var i=0;i<=S;i++){var t=i/S,th=H.sweepTurns*2*Math.PI*t,r=H.rRoot*Math.exp(-B*th),a=H.startAngle*D2R+th,x=H.cx+r*Math.cos(a),y=H.cy+r*Math.sin(a);if(m)x=512-x;var w=Math.min(H.wRoot+(H.wTip-H.wRoot)*Math.pow(t,H.taperPow),H.widthCap*r),s=m?-1:1,nx=Math.cos(a)*s,ny=Math.sin(a);o.push([x+nx*w,y+ny*w]);n.push([x-nx*w,y-ny*w]);}return "M"+o.concat(n.reverse()).map(function(p){return p[0].toFixed(1)+" "+p[1].toFixed(1)}).join("L")+"Z";}
+document.getElementById("s").innerHTML="<path d=\"" + rib(false) + "\" fill=\"#C89B3C\"/><path d=\"" + rib(true) + "\" fill=\"#C89B3C\"/><path d=\"M228 158L284 158L279 296L256 414L233 296L228 158Z\" fill=\"#C89B3C\"/>";
+</script>
