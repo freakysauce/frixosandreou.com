@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 · Sheet not found · Frixos Andreou</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6F5F1">
+<link rel="icon" href="/frixos-site-fable/favicon.svg" type="image/svg+xml">
+<style>
+/* Self-contained on purpose: GitHub Pages serves this file at arbitrary
+   missing paths, so every URL must be absolute and nothing may be relative. */
+@font-face{font-family:'Cabinet Grotesk';src:url('/frixos-site-fable/assets/fonts/CabinetGrotesk-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Switzer';src:url('/frixos-site-fable/assets/fonts/Switzer-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Spline Sans Mono';src:url('/frixos-site-fable/assets/fonts/SplineSansMono-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--paper:#F7F5EE;--grid:#E9E5D8;--ink:#141414;--ink-2:#3A3833;--muted:#7C776C;--gold:#C89B3C;--gold-deep:#8A6414;--hair:#DEDBD3;
+  --mono:'Spline Sans Mono',ui-monospace,monospace;--disp:'Cabinet Grotesk',sans-serif;--body:'Switzer',system-ui,sans-serif;--frame:14px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:88px 88px;background-position:center top;
+  min-height:100svh;display:grid;place-items:center;padding:8vh 28px}
+.sheet-frame{position:fixed;inset:var(--frame);border:1px solid var(--ink);pointer-events:none;mix-blend-mode:multiply}
+@media (max-width:720px){:root{--frame:8px}}
+main{max-width:560px;width:100%}
+.head{display:flex;align-items:baseline;gap:14px;border-top:1px solid var(--ink);padding-top:12px;margin-bottom:40px}
+.head .fig{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--gold-deep);white-space:nowrap}
+.head .rule{flex:1;height:1px;background:var(--hair);align-self:center}
+.head .sheetno{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--muted);white-space:nowrap}
+h1{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(72px,17vw,128px);line-height:.9;letter-spacing:-.015em;
+  color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+@supports not (-webkit-text-stroke:1px black){h1{color:var(--ink)}}
+h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(22px,4.5vw,32px);margin-top:14px}
+p{margin-top:18px;color:var(--ink-2);max-width:46ch}
+.cta{margin-top:34px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.btn{font-family:var(--disp);font-weight:700;font-size:15.5px;letter-spacing:.04em;text-decoration:none;padding:14px 28px;
+  background:var(--ink);color:var(--paper);border:1px solid var(--ink);transition:background .2s,color .2s}
+.btn:hover,.btn:focus-visible{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.link-plain{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink);text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold-deep);outline-offset:3px}
+::selection{background:var(--gold);color:var(--ink)}
+.tb{margin-top:48px;display:inline-block;border:1px solid var(--ink);font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;background:var(--paper)}
+.tb div{padding:6px 12px;border-bottom:1px solid var(--ink)}
+.tb div:last-child{border-bottom:0}
+.tb b{font-weight:400;color:var(--gold-deep)}
+</style>
+</head>
+<body>
+<div class="sheet-frame" aria-hidden="true"></div>
+<main>
+  <div class="head"><span class="fig">FIG. 404</span><span class="rule"></span><span class="sheetno">NOT AS BUILT</span></div>
+  <h1>404</h1>
+  <h2>Sheet not found</h2>
+  <p>This sheet is not in the drawing set. Either the address has a typo, or I moved something and broke your link. If it is the second one: fair, and sorry.</p>
+  <div class="cta">
+    <a class="btn" href="/frixos-site-fable/">Back to sheet 1</a>
+    <a class="link-plain" href="mailto:frixos.andreou.dk@gmail.com?subject=Broken%20link">REPORT THE MISSING SHEET</a>
+  </div>
+  <div class="tb" aria-hidden="true">
+    <div>SHEET · <b>NOT FOUND</b></div>
+    <div>REVISION · NONE ISSUED</div>
+    <div>CPH · 2026</div>
+  </div>
+</main>
+</body>
+</html>

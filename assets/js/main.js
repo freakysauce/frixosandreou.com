@@ -271,6 +271,52 @@
     setTimeout(function () { revealEls.forEach(function (e) { e.classList.add('in'); }); }, 3000);
   }
 
+  /* ---- sheet-index disclosure (mobile nav) ---- */
+  var navEl = document.querySelector('.nav');
+  var navToggle = navEl && navEl.querySelector('.nav-toggle');
+  if (navToggle) {
+    var setOpen = function (open) {
+      navEl.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    navToggle.addEventListener('click', function () {
+      setOpen(!navEl.classList.contains('open'));
+    });
+    navEl.querySelectorAll('ul a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && navEl.classList.contains('open')) {
+        setOpen(false); navToggle.focus();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (navEl.classList.contains('open') && !navEl.contains(e.target)) setOpen(false);
+    });
+    if (/[?&]menu/.test(location.search)) setOpen(true);
+  }
+
+  /* ---- contact button: mailto fires, address is copied as backup ---- */
+  var mail = document.querySelector('#contact .btn');
+  if (mail && navigator.clipboard) {
+    var addr = (mail.getAttribute('href') || '').replace('mailto:', '');
+    var note = document.createElement('span');
+    note.className = 'copied';
+    note.setAttribute('role', 'status');
+    mail.parentNode.appendChild(note);
+    var noteTmr;
+    mail.addEventListener('click', function () {
+      navigator.clipboard.writeText(addr).then(function () {
+        note.textContent = 'COPIED TO CLIPBOARD';
+        note.classList.add('show');
+        clearTimeout(noteTmr);
+        noteTmr = setTimeout(function () {
+          note.classList.remove('show'); note.textContent = '';
+        }, 2400);
+      }, function () { /* clipboard denied: the mailto still fired */ });
+    });
+  }
+
   /* ---- nav current-section ---- */
   var navLinks = document.querySelectorAll('.nav ul a');
   if ('IntersectionObserver' in window && navLinks.length) {
