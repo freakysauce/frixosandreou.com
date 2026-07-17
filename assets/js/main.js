@@ -98,9 +98,15 @@
         f.style.opacity = 0;
         f.style.transition = 'opacity .9s ease ' + (1.6 + i * 0.15) + 's';
       });
+      var notes = [t1, t2];
+      notes.forEach(function (n) {
+        n.style.opacity = 0;
+        n.style.transition = 'opacity .9s ease 2.05s';
+      });
       requestAnimationFrame(function () { requestAnimationFrame(function () {
         lines.forEach(function (p) { p.style.strokeDashoffset = 0; });
         fills.forEach(function (f) { f.style.opacity = 1; });
+        notes.forEach(function (n) { n.style.opacity = 1; });
       }); });
       setTimeout(function () {
         hero.querySelectorAll('.con').forEach(function (c) {
@@ -167,12 +173,19 @@
 
   /* ---- mobile framing: the desktop viewBoxes reserve margin for annotations
      and empty sky; crop to the drawn content so the ram reads large.
-     Hero crops only ≤480px (its equation notes are hidden there anyway, by CSS);
-     the constellation has no annotations, so it crops on the whole ≤900 layout. ---- */
+     Hero crops only ≤480px, where the equation notes trade their leader lines
+     for the empty top corners; the constellation crops on the whole ≤900 layout. ---- */
   var mqPhone = matchMedia('(max-width: 480px)');
   var mqNarrow = matchMedia('(max-width: 900px)');
   function frameForViewport() {
-    if (hero) hero.setAttribute('viewBox', mqPhone.matches ? '28 60 456 380' : '-40 -20 592 572');
+    var phone = mqPhone.matches;
+    if (hero) {
+      hero.setAttribute('viewBox', phone ? '28 60 456 380' : '-40 -20 592 572');
+      t1.setAttribute('x', phone ? 472 : 474); t1.setAttribute('y', phone ? 84 : 118);
+      t1.setAttribute('text-anchor', phone ? 'end' : 'start');
+      t2.setAttribute('x', phone ? 40 : 38); t2.setAttribute('y', phone ? 84 : 118);
+      t2.setAttribute('text-anchor', phone ? 'start' : 'end');
+    }
     if (cons) cons.setAttribute('viewBox', mqNarrow.matches ? '82 92 356 338' : '0 56 512 404');
   }
   frameForViewport();

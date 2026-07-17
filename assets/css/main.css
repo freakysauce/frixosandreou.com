@@ -270,9 +270,10 @@ footer svg{width:22px;height:22px;opacity:.9}
 @media (max-width:480px){
   .hero .tagline{letter-spacing:.16em;font-size:10.5px}
   .hero-eyebrow{letter-spacing:.14em}
-  /* JS crops the hero viewBox to the ram here; hide the annotations
-     (the equation notes never fit at this width) and clip the centerline overrun */
+  /* JS crops the hero viewBox to the ram and moves the equation notes to the
+     top corners; their leader lines don't fit, and the centerline overrun clips */
   .hero-draw svg{overflow:hidden}
-  .hero-draw .note,.hero-draw .anno{display:none}
+  .hero-draw .anno{display:none}
+  .hero-draw .note{font-size:14px}
   .nav .lockup span span{display:none}
 }
