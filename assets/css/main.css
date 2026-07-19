@@ -112,9 +112,6 @@ body{
 .hero .tagline{font-family:var(--mono);font-size:clamp(11px,1.15vw,14px);letter-spacing:.28em;text-transform:uppercase;
   border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:11px 2px;display:inline-block}
 .hero .pos{margin-top:26px;font-size:clamp(16px,1.5vw,19px);line-height:1.6;max-width:42ch;color:var(--ink-2)}
-.hero .myth-line{margin-top:12px;font-size:14.5px;font-style:italic;color:var(--muted)}
-.hero .myth-line a{color:inherit;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:4px}
-.hero .myth-line a:hover,.hero .myth-line a:focus-visible{color:var(--ink)}
 .hero .cta-row{margin-top:36px;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
 .btn{font-family:var(--disp);font-weight:700;font-size:15.5px;letter-spacing:.04em;text-decoration:none;
   padding:15px 32px;background:var(--ink);color:var(--paper);transition:background .2s,color .2s;border:1px solid var(--ink)}
@@ -190,7 +187,6 @@ body{
 .myth-story p{margin-top:20px;color:#B9BFCF;max-width:50ch;font-weight:300}
 .myth-story p b{color:var(--starlight);font-weight:500}
 .myth-story .gr{font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--night-label);margin-bottom:16px}
-.myth-story .myth-kicker{font-style:italic;color:var(--starlight)}
 .myth-chart{position:relative}
 .myth-chart svg{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 0 10px rgba(239,203,110,.4)) drop-shadow(0 0 38px rgba(200,155,60,.26))}
 .myth-chart .cap{margin-top:10px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--night-label)}
