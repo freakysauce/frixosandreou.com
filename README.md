@@ -1,4 +1,4 @@
-# frixos-site-fable
+# frixosandreou.com
 
 Personal brand site for Frixos Andreou (Forward Deployed Engineer, Copenhagen).
 Designed and built end-to-end by Claude Fable 5 (Anthropic). Static, hand-written
